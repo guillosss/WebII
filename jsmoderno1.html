@@ -106,7 +106,36 @@
         let PotenciayRaizFlecha =(base,exponente)=> Math.pow(base,exponente);
         console.log(PotenciayRaizFlecha(2,4))
 
+        //callback es una funcion que pasa el control a otra funcion
+
+        function mensaje(){
+            console.log("hola callback");
+
+        }
+
+        function funcionCallback(funcionCallback){
+            funcionCallback()
+        }
+        //ejecutar la funcion callback
+        funcionCallback(mensaje);
+
+        function saludo (nombre){
+            alert (`hola ${nombre}`);
+        }
+        function callbacksaludo(nombre){
+            let nombre1= prompt("ingrese nombre")
+            nombre(nombre1)
+        }
+
+        callbacksaludo(saludo)
+
         
+
+    
+
+    
+
+
 
 
 
