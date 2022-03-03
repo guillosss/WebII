@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Callbacks </title>
+</head>
+<body>
+    <img src="imagenes/cargando.gif" id="">
+    <h1> Call backs y promesas </h1>
+    <p id="mensaje" style="color: blue;">
+    <form>
+        <label>identificacion</label>
+        <input type="text" name="di" id="di">
+        <br>
+        <label>nombre</label>
+        <input type="text" name="nombre" id="nombre">
+        <br>
+        
+    </form>
+  
+    <script>
+
+    let imagen = document.getElementById("cargando");
+    imagen.style.visibility="hidden";
+
+
+        function fadd(num1, num2){
+            return parseFloat(num1)+ parseFloat(num2)
+
+        }
+    let faddFLECHA = (num1, num2)=> parseFloat(num1)+ parseFloat(num2)
+        // funcion callback
+
+    function foperaciones(num1,num2,oper){
+        let resultado=0;
+        switch(oper){
+            case "+":
+            resultado=parseFloat(num1)+parseFloat(num2);
+            break
+            case "-":
+            resultado=parseFloat(num1)-parseFloat(num2);
+            break
+            case "*":
+            resultado=parseFloat(num1)*parseFloat(num2);
+            break
+            case "/":
+            resultado=parseFloat(num1)/parseFloat(num2);
+            break
+        }
+        return resultado;
+        
+        
+    }
+
+    function fopera(fncall){
+        let valor1= prompt("ingrese el 1er valor")
+        let valor2= prompt("ingrese el 2ndo valor")
+        let operador = prompt("ingrese el operador")
+        return fncall(valor1,valor2,operador)
+        
+    }
+
+    //ejecutar 
+    //console.log(fopera(fadd))
+    //console.log(fopera(foperaciones))
+
+    function servidor(){
+        setTimeout(function(){
+            //console.log("el servidor genero una respuesta");
+            let datospersonales = {di:"123",nombre :"juan"};
+        
+            //console.log(`${datospersonales.di}, ${datospersonales.nombre}`)
+            imagen.style.visibility="hidden";
+            document.getElementById('di').value=datospersonales.di;
+            document.getElementById('nombre').value=datospersonales.nombre;
+            document.getElementById('mensaje').innerHTML=""
+
+
+        },5000)
+
+    }
+
+    function fncb(fnc){
+        fnc();
+        imagen.style.visibility= "visible";
+        document.getElementById('mensaje').innerHTML="Espere por favor ...";
+    }
+
+    //ejecutar fncb
+
+    //fncb(servidor)
+
+    //crear promesas 
+
+    let promesa1 = new Promise((resolve,reject)=>{
+        let nota =5 ;
+        if (nota >=4){
+            resolve("tiene derecho")
+        }
+        else{
+            reject("no tiene derecho")
+        }
+    })
+
+    // usar la promesa
+
+    promesa1
+    .then((mensaje)=>{
+        console.log(mensaje)
+
+    })
+    .then(()=>{
+        console.log("excelente")
+    })
+    .catch(function(error){
+        console.log(error)
+    })
+
+    // promesa tipo funcion
+
+function fpromesa2(usuario){
+    return new Promise((resolve,reject)=>
+    {
+        if (usuario == "lruiz"){
+            let datosusuario={nombre:"lina ruiz", email:"x@x.com"};
+            resolve (datosusuario)
+        }
+        else{
+            reject("usuario no encontrado")
+        }
+    })
+}
+//usar fpromesa 
+
+    fpromesa2("mgil")
+    .then((data)=>{
+        console.log((`nombre ${data.nombre},email ${data.email}`))
+    })
+    .catch((error)=>{
+        console.log("usuario no encontrado")
+
+    })
+    </script>
+    
+</body>
+</html>
